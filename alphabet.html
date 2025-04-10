@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Adventure</title>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Fredoka+One&display=swap');
+        
+        :root {
+            --color-primary: #FF9E3F;
+            --color-secondary: #6ECBFF;
+            --color-accent: #FF6B8B;
+            --color-bg: #FFF9F2;
+            --color-text: #3A3A3A;
+            --color-card: #FFFFFF;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Baloo 2', cursive;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url(../EnglishLearn/images/objects/alphabet.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--color-accent);
+            font-size: 3rem;
+            margin: 20px 0;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--color-secondary);
+            border-radius: 4px;
+        }
+        
+        .letter-display {
+            font-family: 'Fredoka One', cursive;
+            font-size: 10rem;
+            margin: 30px 0;
+            color: var(--color-primary);
+            text-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 50%;
+            border: 8px solid var(--color-secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .letter-display::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        .letter-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: var(--color-card);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 6px dashed var(--color-primary);
+        }
+        
+        .letter-btn {
+            font-family: 'Fredoka One', cursive;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 rgba(210, 125, 44, 0.8);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .letter-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.3), transparent);
+        }
+        
+        .letter-btn:hover {
+            background-color: #FF8C2B;
+            transform: translateY(-3px) rotate(10deg);
+            box-shadow: 0 6px 0 rgba(210, 125, 44, 0.8);
+        }
+        
+        .letter-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(210, 125, 44, 0.8);
+        }
+        
+        /* Efeito de pulso quando uma letra é selecionada */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .active-letter {
+            animation: pulse 0.5s;
+            background-color: var(--color-accent);
+            box-shadow: 0 4px 0 rgba(210, 79, 107, 0.8);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .letter-container {
+                grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+                gap: 10px;
+                max-width: 90%;
+            }
+            
+            .letter-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+            }
+            
+            .letter-display {
+                font-size: 8rem;
+                width: 150px;
+                height: 150px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .letter-container {
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                gap: 8px;
+            }
+            
+            .letter-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .letter-display {
+                font-size: 6rem;
+                width: 120px;
+                height: 120px;
+                border-width: 6px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Efeito de confete */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: confetti-fall 3s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Alphabet Adventure</h1>
+    <div class="letter-display" id="current-letter">A</div>
+    <div class="letter-container" id="letters-container"></div>
+
+    <script>
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        const lettersContainer = document.getElementById('letters-container');
+        const currentLetterDisplay = document.getElementById('current-letter');
+
+        // Cria botões das letras
+        letters.forEach(letter => {
+            const btn = document.createElement('button');
+            btn.className = 'letter-btn';
+            btn.textContent = letter;
+            btn.onclick = () => {
+                playLetterSound(letter);
+                currentLetterDisplay.textContent = letter;
+                
+                // Adiciona efeito visual
+                btn.classList.add('active-letter');
+                setTimeout(() => {
+                    btn.classList.remove('active-letter');
+                }, 500);
+                
+                // Efeito de confete para vogais
+                if (['A', 'E', 'I', 'O', 'U'].includes(letter)) {
+                    createConfetti();
+                }
+            };
+            lettersContainer.appendChild(btn);
+        });
+
+        // Toca o áudio da letra
+        function playLetterSound(letter) {
+            const audio = new Audio(`../EnglishLearn/sounds/alphabet/${letter}.mp3`);
+            audio.play();
+        }
+        
+        // Cria efeito de confete
+        function createConfetti() {
+            const colors = ['#FF9E3F', '#6ECBFF', '#FF6B8B', '#5CDB5C', '#FFD166'];
+            const container = document.body;
+            
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                container.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
